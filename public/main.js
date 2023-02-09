@@ -42,7 +42,7 @@ function createPlannedTrip(trip, nextTrip) {
 }
 
 function getPlannedSights() {
-    axios.get('postgresql://klGitbub:v2_3yuUN_Tn3M4FyY3MXaAuDbYqpfn93@db.bit.io:5432/klGitbub/CapstoneProject')
+    axios.get('http://127.0.0.1:5500/sight')
     .then(res => {
         for (let i = 0; i < res.data.length; i += 2) {
             const trip = res.data[i]
@@ -70,7 +70,7 @@ function createPlannedSight(sight, nextSight) {
 //getPlannedTrips()
 getPlannedSights()
 // Get the button element
-var addPlannedTrip = document.getElementById("addPlannedTrip ");
+var addPlannedTrip = document.getElementById("addPlannedTrip");
 
 // Add an event listener to the button to show the dialog box
 addPlannedTrip.addEventListener("click", function() {
@@ -84,18 +84,18 @@ addPlannedTrip.addEventListener("click", function() {
   dialog.style.border = "1px solid black";
   
   // Add the three fields
-  var plannedTripName = document.createElement("input");
+  var field1 = document.createElement("input");
   field1.type = "text";
   field1.placeholder = "Trip Name";
   dialog.appendChild(field1);
   
   var field2 = document.createElement("input");
-  field2.type = "text";
+  field2.type = "date";
   field2.placeholder = "Start Date";
   dialog.appendChild(field2);
   
   var field3 = document.createElement("input");
-  field3.type = "text";
+  field3.type = "date";
   field3.placeholder = "End Date";
   dialog.appendChild(field3);
   
@@ -117,9 +117,8 @@ addPlannedTrip.addEventListener("click", function() {
       field2: field2.value,
       field3: field3.value
     };
-    
     // Call the REST API
-    fetch("https://your-api-endpoint.com/save", {
+    fetch("http://127.0.0.1:5500/trip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -133,6 +132,7 @@ addPlannedTrip.addEventListener("click", function() {
       } else {
         alert("Failed to save data");
       }
+      dialog.style.display = "none";
     })
     .catch(error => {
       console.error(error);
