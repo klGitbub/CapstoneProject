@@ -118,7 +118,7 @@ addPlannedTrip.addEventListener("click", function() {
       field3: field3.value
     };
     // Call the REST API
-    fetch("http://127.0.0.1:5500/trip", {
+    fetch("http://127.0.0.1:5432/trip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
