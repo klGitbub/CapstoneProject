@@ -21,7 +21,7 @@ module.exports = {
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    postPlannedTrips: (req, res) => {
+    postPlannedTrip: (req, res) => {
         let {PlannedStart, PlannedEnd, TripName} = req.body;
         sequelize.query(`
         INSERT INTO PlannedTrips
@@ -40,7 +40,7 @@ module.exports = {
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    postPlannedSights: (req, res) => {
+    postPlannedSight: (req, res) => {
         let {PlannedName, SightName, PlannedVisit} = req.body;
         sequelize.query(`
         INSERT INTO PlannedSights

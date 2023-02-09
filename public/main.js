@@ -117,8 +117,9 @@ addPlannedTrip.addEventListener("click", function() {
       field2: field2.value,
       field3: field3.value
     };
+
     // Call the REST API
-    fetch("http://127.0.0.1:5432/plannedtrips", {
+    fetch("http://127.0.0.1:5432/plannedtrip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -137,12 +138,12 @@ addPlannedTrip.addEventListener("click", function() {
     .catch(error => {
       console.error(error);
     });
-    app.post('http://127.0.0.1:5432/plannedtrip', (req, res) => {
+    axios.post('http://127.0.0.1:5432/plannedtrip', (req, res) => {
         const field1 = req.body.field1;
         const field2 = req.body.field2;
         const field3 = req.body.field3;
-       
-        const sql = "INSERT INTO PlannedTrips (TripName, PlannedStart, PlannedEnd) VALUES (?, ?, ?)";
+        //alert(field1 + field2 + field3);
+        const sql = `INSERT INTO PlannedTrips (TripName, PlannedStart, PlannedEnd) VALUES (${Field1}, ${Field2}, ${Field3})`;
         conn.query(sql, [field1, field2, field3], (err, result) => {
           if (err) throw err;
           res.send({ id: result.insertId });
