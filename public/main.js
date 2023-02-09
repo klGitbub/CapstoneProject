@@ -67,5 +67,75 @@ function createPlannedSight(sight, nextSight) {
     return sightElem
 }
 
+//getPlannedTrips()
 getPlannedSights()
-getPlannedSights()
+// Get the button element
+var addPlannedTrip = document.getElementById("addPlannedTrip ");
+
+// Add an event listener to the button to show the dialog box
+addPlannedTrip.addEventListener("click", function() {
+  // Create the dialog box
+  var dialog = document.createElement("div");
+  dialog.style.display = "flex";
+  dialog.style.flexDirection = "column";
+  dialog.style.alignItems = "center";
+  dialog.style.backgroundColor = "white";
+  dialog.style.padding = "20px";
+  dialog.style.border = "1px solid black";
+  
+  // Add the three fields
+  var plannedTripName = document.createElement("input");
+  field1.type = "text";
+  field1.placeholder = "Trip Name";
+  dialog.appendChild(field1);
+  
+  var field2 = document.createElement("input");
+  field2.type = "text";
+  field2.placeholder = "Start Date";
+  dialog.appendChild(field2);
+  
+  var field3 = document.createElement("input");
+  field3.type = "text";
+  field3.placeholder = "End Date";
+  dialog.appendChild(field3);
+  
+  
+  
+  
+  // Add the save button
+  var saveBtn = document.createElement("button");
+  saveBtn.innerHTML = "Save";
+  dialog.appendChild(saveBtn);
+  
+  // Show the dialog box
+  document.body.appendChild(dialog);
+  
+  // Add an event listener to the save button to call the REST API
+  saveBtn.addEventListener("click", function() {
+    var data = {
+      field1: field1.value,
+      field2: field2.value,
+      field3: field3.value
+    };
+    
+    // Call the REST API
+    fetch("https://your-api-endpoint.com/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      // Check the response from the API
+      if (response.status === 200) {
+        alert("Data saved successfully");
+      } else {
+        alert("Failed to save data");
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  });
+});
