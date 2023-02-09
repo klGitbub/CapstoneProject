@@ -34,7 +34,7 @@ function createPlannedTrip(trip, nextTrip) {
     `<div class="card" id="trip-${trip['trip_id']}">
         <h2>${dateDisplayText}</h2>
         <h3>${trip['trip_id']}</h3>
-        <h4>${appt['trip_name']}}</h4>
+        <h4>${trip['trip_name']}}</h4>
         ${nextTrip ? `<h4>${nextTrip['trip_name']}</h4>` : `<span style="display:none"></span>`}
     </div>`
 
@@ -42,7 +42,7 @@ function createPlannedTrip(trip, nextTrip) {
 }
 
 function getPlannedSights() {
-    axios.get('http://127.0.0.1:5432/sight')
+    axios.get('http://127.0.0.1:5500/sight')
     .then(res => {
         for (let i = 0; i < res.data.length; i += 2) {
             const trip = res.data[i]
@@ -118,7 +118,7 @@ addPlannedTrip.addEventListener("click", function() {
       field3: field3.value
     };
     // Call the REST API
-    fetch("http://127.0.0.1:5432/", {
+    fetch("http://127.0.0.1:5500/trip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -15,17 +15,16 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 module.exports = {
     getPlannedTrips: (req, res) => {
         sequelize.query(`
-        SELECT * FROM cc_PlannedTrips
-        ON ID = '${ID}'
+        SELECT * FROM PlannedTrips
         order by PlannedStart ASC;
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    updatePlannedTrips: (req, res) => {
+    postPlannedTrips: (req, res) => {
         let {PlannedStart, PlannedEnd, TripName} = req.body;
         sequelize.query(`
-        UPDATE PlannedTrips
+        INSERT INTO PlannedTrips
         SET TripName = '${TripName}',
         PlannedStart = '${PlannedStart}',
         plannedEnd = '${PlannedEnd}',
@@ -36,16 +35,15 @@ module.exports = {
     getPlannedSights: (req, res) => {
         sequelize.query(`
         SELECT * FROM PlannedSights
-        WHERE id = '${ID}'
         ORDER BY PlannedStart ASC;
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    updatePlannedSights: (req, res) => {
+    postPlannedSights: (req, res) => {
         let {PlannedName, SightName, PlannedVisit} = req.body;
         sequelize.query(`
-        UPDATE PlannedSights
+        INSERT INTO PlannedSights
         SET PlannedName = '${PlannedName}',
         SightName = '${SightName}',
         PlannedVisit = '${PlannedVisit}',
