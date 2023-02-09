@@ -8,7 +8,7 @@ const app = express()
 
 app.use(express.json())
 
-app.listen(5432, () => console.log('server running on 5432'))
+app.listen(4000, () => console.log('server running on 4000'))
 
 app.use(cors())
 

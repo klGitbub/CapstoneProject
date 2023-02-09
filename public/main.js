@@ -137,5 +137,16 @@ addPlannedTrip.addEventListener("click", function() {
     .catch(error => {
       console.error(error);
     });
+    app.post('http://127.0.0.1:5432/trip', (req, res) => {
+        const field1 = req.body.field1;
+        const field2 = req.body.field2;
+        const field3 = req.body.field3;
+       
+        const sql = "INSERT INTO PlannedTrips (TripName, PlannedStart, PlannedEnd) VALUES (?, ?, ?)";
+        conn.query(sql, [field1, field2, field3], (err, result) => {
+          if (err) throw err;
+          res.send({ id: result.insertId });
+        });
+    });
   });
 });
