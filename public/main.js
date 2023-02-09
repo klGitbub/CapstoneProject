@@ -42,7 +42,7 @@ function createPlannedTrip(trip, nextTrip) {
 }
 
 function getPlannedSights() {
-    axios.get('http://127.0.0.1:5500/sight')
+    axios.get('http://127.0.0.1:5432/sight')
     .then(res => {
         for (let i = 0; i < res.data.length; i += 2) {
             const trip = res.data[i]
@@ -118,7 +118,7 @@ addPlannedTrip.addEventListener("click", function() {
       field3: field3.value
     };
     // Call the REST API
-    fetch("http://127.0.0.1:5500/trip", {
+    fetch("http://127.0.0.1:5432/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
