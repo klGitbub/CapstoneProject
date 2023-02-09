@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const {SERVER_PORT} = process.env
-const {seed} = require('./seed.js')
+const { getPlannedTrips, updatePlannedTrips, getPlannedSights, updatePlannedSights} = require('./controller.js')
 
 const app = express()
 
@@ -12,4 +12,10 @@ app.listen(4000, () => console.log('server running on 4000'))
 
 app.use(cors())
 
-app.post('/seed', seed)
+app.get('/trip', getPlannedTrips)
+app.put('/trip', updatePlannedTrips)
+app.get('/sight', getPlannedSights)
+app.put('/sight', updatePlannedSights)
+
+
+app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`))

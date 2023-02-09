@@ -13,52 +13,44 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 })
 
 module.exports = {
-    getPlannedDate: (req, res) => {
+    getPlannedTrips: (req, res) => {
         sequelize.query(`
-        SELECT * FROM cc_clients AS c
-        JOIN cc_users AS u
-        ON u.user_id = ${userId};
+        SELECT * FROM cc_PlannedTrips
+        ON ID = '${ID}'
+        order by PlannedStart ASC;
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    updateUserInfo: (req, res) => {
-        let {firstName, lastName, phoneNumber, email, address, city, state, zip_Code} = req.body;
+    updatePlannedTrips: (req, res) => {
+        let {PlannedStart, PlannedEnd, TripName} = req.body;
         sequelize.query(`
-        UPDATE cc_users
-        SET first_name = '${firstName}',
-        last_name = '${lastName}',
-        phone_number = ${phoneNumber},
-        email = '${email}'
-        WHERE user_id = ${userId};
-
-        UPDATE cc_clients
-        SET address = '${address}',
-        city = '${city}',
-        state = '${state}',
-        zipCode = '${zip_Code}'
-        WHERE user_id = ${userId};
+        UPDATE PlannedTrips
+        SET TripName = '${TripName}',
+        PlannedStart = '${PlannedStart}',
+        plannedEnd = '${PlannedEnd}',
         `)
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     },
-    getUserAppt: (req, res) => {
+    getPlannedSights: (req, res) => {
         sequelize.query(`
-        SELECT * FROM cc_appointments
-        WHERE client_id = ${clientId}
-        ORDER BY date DESC;
+        SELECT * FROM PlannedSights
+        WHERE id = '${ID}'
+        ORDER BY PlannedStart ASC;
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
-    requestAppointment: (req, res) => {
-        const {date, service} = req.body;
+    updatePlannedSights: (req, res) => {
+        let {PlannedName, SightName, PlannedVisit} = req.body;
         sequelize.query(`
-        INSERT INTO cc_appointments (client_id, date, service_type, notes, approved, completed)
-        VALUES (${clientId}, '${date}', '${service}', '', false, false)
-        RETURNING *;
+        UPDATE PlannedSights
+        SET PlannedName = '${PlannedName}',
+        SightName = '${SightName}',
+        PlannedVisit = '${PlannedVisit}',
         `)
-        .then(dbRes => res.status(200).send(dbRes[0]))
+        .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     }
 }
