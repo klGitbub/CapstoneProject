@@ -12,10 +12,10 @@ app.listen(4000, () => console.log('server running on 4000'))
 
 app.use(cors())
 
-app.get('/trip', getPlannedTrips)
-app.put('/trip', postPlannedTrips)
-app.get('/sight', getPlannedSights)
-app.put('/sight', postPlannedSights)
+app.get('/plannedtrips', getPlannedTrips)
+app.post('/plannedtrip', postPlannedTrips)
+app.get('/plannedsights', getPlannedSights)
+app.post('/plannedsight', postPlannedSights)
 
 
 app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`))
