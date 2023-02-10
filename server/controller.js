@@ -70,25 +70,29 @@ let nextEmp = 5
 
 module.exports = {
     getPlannedTrips: (req, res) => {
-        res.status(200).send("getPlannedTrips")
-        sequelize.query(`select * from public.PlannedTrips
+        //res.status(200).send("getPlannedTrips");
+        //*
+        sequelize.query(`select * from "public.PlannedTrips"
                          order by StartDate ASC;`)
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log(err))
+        //*/
     },
 
     postPlannedTrip: (req, res) => {
-        res.status(200).send("postPlannedTrips")
-        let {TripName, PlannedStart, PlannedEnd} = req.body
-    
-        sequelize.query(`INSERT into public.PlannedTrips 
-                        (TripName, PlannedStart, PlannedEnd)
-                        values (${TripName}, ${PlannedStart}, ${PlannedEnd});
+        let {TripName, PlannedStart, PlannedEnd} = JSON.parse(req.body.body);
+        console.log(`req.body=${JSON.stringify(req.body)}`);
+        //res.status(200).send("postPlannedTrip");
+        //*
+        console.log(`TripName=${TripName}, PlannedStart=${PlannedStart}, PlannedEnd=${PlannedEnd}`);
+        sequelize.query(`INSERT into "public.PlannedTrips"("TripName", "PlannedStart", "PlannedEnd")
+                        values ('${TripName}', '${PlannedStart}', '${PlannedEnd}');
         `)
             .then(dbRes => {
                 res.status(200).send(dbRes[0])
                 nextEmp += 2
             })
             .catch(err => console.log(err))
+        //*/
     },
 }
