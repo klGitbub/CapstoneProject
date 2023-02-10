@@ -81,10 +81,10 @@ module.exports = {
 
     postPlannedTrip: (req, res) => {
         let {field1, field2, field3} = JSON.parse(req.body.body);
-        console.log(`req.body=${JSON.stringify(req.body)}`);
+        //console.log(`req.body=${JSON.stringify(req.body)}`);
         //res.status(200).send("postPlannedTrip");
         //*
-        console.log(`TripName=${field1}, PlannedStart=${field2}, PlannedEnd=${field3}`);
+        //console.log(`TripName=${field1}, PlannedStart=${field2}, PlannedEnd=${field3}`);
         sequelize.query(`INSERT into "public.PlannedTrips"("TripName", "PlannedStart", "PlannedEnd")
                         values ('${field1}', '${field2}', '${field3}');
         `)

@@ -138,15 +138,15 @@ addPlannedTrip.addEventListener("click", function() {
     .catch(error => {
       console.error(error);
     });
-    axios.post('http://127.0.0.1:5432/postplannedtrip', (req, res) => {
-        let {field1, field2, field3} = JSON.parse(req.body.body);
-        //alert(field1 + field2 + field3);
-        console.log(JSON.stringify(req.body))
-        const sql = `INSERT INTO "public.PlannedTrips" ("TripName", "PlannedStart", "PlannedEnd") VALUES ('${field1}', '${field2}', '${field3}')`;
-        conn.query(sql, [field1, field2, field3], (err, result) => {
-          if (err) throw err;
-          res.send({ id: result.insertId });
-        });
-    });
+    // axios.post('http://127.0.0.1:5432/postplannedtrip', (req, res) => {
+    //     let {field1, field2, field3} = JSON.parse(req.body.body);
+    //     //alert(field1 + field2 + field3);
+    //     console.log(JSON.stringify(req.body))
+    //     const sql = `INSERT INTO "public.PlannedTrips" ("TripName", "PlannedStart", "PlannedEnd") VALUES ('${field1}', '${field2}', '${field3}')`;
+    //     conn.query(sql, [field1, field2, field3], (err, result) => {
+    //       if (err) throw err;
+    //       res.send({ id: result.insertId });
+    //     });
+    // });
   });
 });
