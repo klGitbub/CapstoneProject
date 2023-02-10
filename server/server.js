@@ -38,7 +38,7 @@ app.use(express.json())
 app.use(cors())
 
 // USERS
-app.get('/clients', getAllClients)
+//app.get('/clients', getAllClients)
 
 // APPOINTMENTS
 //app.get('/pending', getPendingAppointments)

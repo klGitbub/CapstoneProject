@@ -119,7 +119,7 @@ addPlannedTrip.addEventListener("click", function() {
     };
 
     // Call the REST API
-    axios.put("http://127.0.0.1:5432/postplannedtrip", {
+    fetch("http://127.0.0.1:5432/postplannedtrip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
