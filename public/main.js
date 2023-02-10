@@ -138,7 +138,7 @@ addPlannedTrip.addEventListener("click", function() {
     .catch(error => {
       console.error(error);
     });
-    axios.put('http://127.0.0.1:5432/postplannedtrip', (req, res) => {
+    axios.post('http://127.0.0.1:5432/postplannedtrip', (req, res) => {
         const field1 = req.body.field1;
         const field2 = req.body.field2;
         const field3 = req.body.field3;
