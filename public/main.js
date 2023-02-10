@@ -3,6 +3,8 @@ const actualTrips = document.querySelector('#ActualTrips')
 const plannedSights = document.querySelector('#PlannedSights')
 const actualSights = document.querySelector('#ActualSights')
 
+document.getElementById("addPlannedSight").disabled = true;
+
 function createDisplayDate(date) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const reqDate = new Date(date)
@@ -130,6 +132,7 @@ addPlannedTrip.addEventListener("click", function() {
       // Check the response from the API
       if (response.status === 200) {
         alert("Data saved successfully");
+        fetchAndLoadPlannedTrips();
       } else {
         alert("Failed to save data");
       }
@@ -149,4 +152,64 @@ addPlannedTrip.addEventListener("click", function() {
     //     });
     // });
   });
+  function loadPlannedSights(tripName) {
+    alert("Fetch and load the planned sights for trip: " + tripName);
+    document.getElementById("addPlannedSight").disabled = false;
+  }
+  function fetchAndLoadPlannedTrips() {
+    alert("Fetching records");
+    function createTable() {
+        // create a table element
+        const table = document.createElement("table");
+        alert("table created");
+
+        // create the header row
+        const headerRow = document.createElement("tr");
+        const field1Header = document.createElement("th");
+        field1Header.textContent = "Trip Name";
+        headerRow.appendChild(field1Header);
+        const field2Header = document.createElement("th");
+        field2Header.textContent = "Start Date";
+        headerRow.appendChild(field2Header);
+        const field3Header = document.createElement("th");
+        field3Header.textContent = "End Date";
+        headerRow.appendChild(field3Header);
+        table.appendChild(headerRow);
+        return table;
+    }
+        // loop through the data and create a row for each record
+    function showRow(data) {
+        const values = JSON.parse(data);
+        const TripName = values.TripName;
+        const PlannedStart = values.PlannedStart;
+        const PlannedEnd = values.PlannedEnd;
+        const row = document.createElement("tr");
+        const field1Cell = document.createElement("td");
+        field1Cell.textContent = TripName;
+        row.appendChild(field1Cell);
+        const field2Cell = document.createElement("td");
+        field2Cell.textContent = PlannedStart;
+        row.appendChild(field2Cell);
+        const field3Cell = document.createElement("td");
+        field3Cell.textContent = PlannedEnd;
+        row.appendChild(field3Cell);
+        table.appendChild(row);
+        row.addEventListener("click", function() {
+            loadPlannedSights(TripName);
+        })
+    };
+
+    // add the table to the page
+    const table = createTable();
+    axios.get("http://127.0.0.1:5432/getplannedtrips")
+        .then(res => {
+            for (let i = 0; i < res.data.length; i += 2) {
+                const data = JSON.stringify(res.data[i]);
+                showRow(data);
+            }
+        })
+        .catch(err => console.log(err))
+        document.body.appendChild(table); 
+  }
+  
 });

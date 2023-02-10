@@ -73,7 +73,7 @@ module.exports = {
         //res.status(200).send("getPlannedTrips");
         //*
         sequelize.query(`select * from "public.PlannedTrips"
-                         order by StartDate ASC;`)
+                         order by "PlannedStart" ASC;`)
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log(err))
         //*/
