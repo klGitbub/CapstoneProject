@@ -42,7 +42,7 @@ function createPlannedTrip(trip, nextTrip) {
 }
 
 function getPlannedSights() {
-    axios.get('http://127.0.0.1:5500/plannedsights')
+    axios.post('http://127.0.0.1:5432/getplannedsights')
     .then(res => {
         for (let i = 0; i < res.data.length; i += 2) {
             const trip = res.data[i]
@@ -119,7 +119,7 @@ addPlannedTrip.addEventListener("click", function() {
     };
 
     // Call the REST API
-    axios.get("http://127.0.0.1:5432/postplannedtrip", {
+    axios.post("http://127.0.0.1:5432/postplannedtrip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -143,7 +143,7 @@ addPlannedTrip.addEventListener("click", function() {
         const field2 = req.body.field2;
         const field3 = req.body.field3;
         //alert(field1 + field2 + field3);
-        const sql = `INSERT INTO PlannedTrips (TripName, PlannedStart, PlannedEnd) VALUES (${Field1}, ${Field2}, ${Field3})`;
+        const sql = `INSERT INTO public.PlannedTrips (TripName, PlannedStart, PlannedEnd) VALUES (${Field1}, ${Field2}, ${Field3})`;
         conn.query(sql, [field1, field2, field3], (err, result) => {
           if (err) throw err;
           res.send({ id: result.insertId });

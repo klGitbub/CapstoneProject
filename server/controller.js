@@ -70,16 +70,18 @@ let nextEmp = 5
 
 module.exports = {
     getPlannedTrips: (req, res) => {
-        sequelize.query(`select * from PlannedTrips
+        res.status(200).send("getPlannedTrips")
+        sequelize.query(`select * from public.PlannedTrips
                          order by StartDate ASC;`)
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log(err))
     },
 
     postPlannedTrip: (req, res) => {
+        res.status(200).send("postPlannedTrips")
         let {TripName, PlannedStart, PlannedEnd} = req.body
     
-        sequelize.query(`INSERT into PlannedTrips 
+        sequelize.query(`INSERT into public.PlannedTrips 
                         (TripName, PlannedStart, PlannedEnd)
                         values (${TripName}, ${PlannedStart}, ${PlannedEnd});
         `)

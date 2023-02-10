@@ -46,7 +46,7 @@ app.use(cors())
 app.get('/getplannedtrips', getPlannedTrips)
 //app.get('/appt', getPastAppointments)
 app.post('/postplannedtrip', postPlannedTrip)
-app.put('/saveplannedtrip', savePlannedTrip)
+//app.put('/saveplannedtrip', savePlannedTrip)
 //app.put('/complete', completeAppointment)
 
 app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`))
