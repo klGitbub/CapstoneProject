@@ -76,7 +76,7 @@ module.exports = {
             .catch(err => console.log(err))
     },
 
-    savePlannedTrip: (req, res) => {
+    postPlannedTrip: (req, res) => {
         let {TripName, PlannedStart, PlannedEnd} = req.body
     
         sequelize.query(`INSERT into PlannedTrips 
