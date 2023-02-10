@@ -28,6 +28,7 @@ const {
     //getAllClients,
     //getPendingAppointments,
     getPlannedTrips,
+    postPlannedTrip,
     //getPastAppointments, 
     savePlannedTrip, 
     //completeAppointment, 
@@ -44,6 +45,7 @@ app.use(cors())
 //app.get('/pending', getPendingAppointments)
 app.get('/getplannedtrips', getPlannedTrips)
 //app.get('/appt', getPastAppointments)
+app.post('/postplannedtrip', postPlannedTrip)
 app.put('/saveplannedtrip', savePlannedTrip)
 //app.put('/complete', completeAppointment)
 
