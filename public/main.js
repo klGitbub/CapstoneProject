@@ -213,3 +213,5 @@ addPlannedTrip.addEventListener("click", function() {
   }
   
 });
+  
+   
